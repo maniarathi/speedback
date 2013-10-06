@@ -10,10 +10,15 @@
 		<div class="row">
 			<ul class="nav nav-tabs" data-tabs="tabs">
 			<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+			
+			{{#if currentUser}}
+			<li><a href="#existing" data-toggle="tab">My Events</a></li>
+			<li><a href="#join" data-toggle="tab">Join</a></li>
+			<li><a href="#about" data-toggle="tab">About</a></li>
+			{{else}}
 			<li><a href="#login" data-toggle="tab">Login</a></li>
 			<li><a href="#new" data-toggle="tab">Create New</a></li>
-			<li><a href="#existing" data-toggle="tab">My Events</a></li>
-			<li><a href="#about" data-toggle="tab">About</a></li>
+			{{/if}}
 			</ul>
 			<div id="my-tab-content" class="tab-content">
 			<div class="tab-pane active" id="home">
@@ -21,8 +26,17 @@
 				<p>SpeedBack is an application that gives you real-time feedback on your presentation.  Your audience can provide constructive criticism as you present and you will receive notifications of the top comments to adjust accordingly.</p>
 			</div>
 			<div class="tab-pane" id="login">
-				<h1>Create an Account</h1>
-				{{> register}}
+				<div class="row">
+					<div class="span6">
+						<h1>Login</h1>
+						{{> login}}
+						{{loggingIn}}
+					</div>
+					<div class="span6">
+						<h1>Create an Account</h1>
+						{{> register}}
+					</div>
+				</div>				
 			</div>
 			<div class="tab-pane" id="new">
 				<h1>Create a new event</h1>
@@ -30,6 +44,12 @@
 			</div>
 			<div class="tab-pane" id="existing">
 				<h1>My Events</h1>
+			</div>
+			<div class="tab-pane" id="join">
+				<h1>Join an Event</h1>
+				<form id="join-form" action="action">
+					<pre>Event ID	<input type="text" id="join-id" required /></br><button name="join">Join!</button></pre>
+				</form>
 			</div>
 			<div class="tab-pane" id="about">
 				<h3>Send any comments and suggestions to <a href="mailto:mani.arathi@gmail.com">mani.arathi@gmail.com</a>.</h3>
@@ -47,10 +67,16 @@
 </template>
 
 <template name="register">
-			<form id="login-form" action="action">
-			<pre>Username	<input type="text" id="login-username" required/></br>Email		<input type="email" id="login-email" required/></br>Password	<input type="password" id="login-password" required/></br><button name="register">Create an account!</button/></pre>
-			</form>
-	</div>
+	<form id="register-form" action="action">
+	<pre>Email		<input type="email" id="register-email" required/></br>Password	<input type="password" id="register-password" required/></br><button name="register">Create an account!</button/></pre>
+	</form>
+   
+</template>
+
+<template name="login">
+	<form id="login-form" action="action">
+	<pre>Email		<input type="email" id="login-email" required/></br>Password	<input type="password" id="login-password" required/></br><button name="login">Login</button/></pre>
+	</form>
    
 </template>
 
@@ -59,10 +85,11 @@
 		<h2>Event details</h2>
 		<pre>Event name	<input type="text" id="event-name" required /></br>Location	<input type="text" id="event-location" /></pre>
 		<h2>Feedback Types</h2>
-		<pre>Option 1	<select name="option1">{{> options}}</select></br>Option 2	<select name="option2">{{> options}}</select></br>Option 3	<select name="option3">{{> options}}</select></pre>
+		<pre>Option 1	<select id="option1" required>{{> options}}</select></br>Option 2	<select id="option2">{{> options}}</select></br>Option 3	<select id="option3">{{> options}}</select></pre>
+		<button name="create">Create event!</button>
 	</form>
 </template>
 
 <template name="options">
-<option value="opt1">Sound</option><option value="opt2">Content</option><option value="opt3">Visuals</option><option value="opt4">Delivery</option>
+<option id="opt0">None</option><option id="opt1">Sound</option><option id="opt2">Content</option><option id="opt3">Visuals</option><option id="opt4">Delivery</option>
 </template>
