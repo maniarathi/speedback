@@ -1,0 +1,46 @@
+<head>
+  <title>SpeedBack</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+		{{> title}}
+		</div>
+		<div class="row">
+			<ul class="nav nav-tabs" data-tabs="tabs">
+			<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+			<li><a href="#login"data-toggle="tab">Login</a></li>
+			<li><a href="#about" data-toggle="tab">About</a></li>
+			</ul>
+			<div id="my-tab-content" class="tab-content">
+			<div class="tab-pane active" id="home">
+				<h1>What is SpeedBack?</h1>
+				<p>SpeedBack is an application that gives you real-time feedback on your presentation.  Your audience can provide constructive criticism as you present and you will receive notifications of the top comments to adjust accordingly.</p>
+			</div>
+			<div class="tab-pane" id="login">
+				<h1>Create an Account</h1>
+				{{> register}}
+			</div>
+			<div class="tab-pane" id="about">
+				<h3>Send any comments and suggestions to <a href="mailto:mani.arathi@gmail.com">mani.arathi@gmail.com</a>.</h3>
+			</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<template name="title">
+	<div class="text-right">
+		<h1>SpeedBack</h1>
+		{{greeting}}
+	</div>
+</template>
+
+<template name="register">
+			<form id="login-form" action="action">
+			<pre>Username	<input type="text" id="login-username" required/></br>Email		<input type="email" id="login-email" required/></br>Password	<input type="password" id="login-password" required/></br><button name="register">Create an account!</button/></pre>
+			</form>
+	</div>
+   
+</template>
