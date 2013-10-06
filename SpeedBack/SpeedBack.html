@@ -10,7 +10,9 @@
 		<div class="row">
 			<ul class="nav nav-tabs" data-tabs="tabs">
 			<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-			<li><a href="#login"data-toggle="tab">Login</a></li>
+			<li><a href="#login" data-toggle="tab">Login</a></li>
+			<li><a href="#new" data-toggle="tab">Create New</a></li>
+			<li><a href="#existing" data-toggle="tab">My Events</a></li>
 			<li><a href="#about" data-toggle="tab">About</a></li>
 			</ul>
 			<div id="my-tab-content" class="tab-content">
@@ -21,6 +23,13 @@
 			<div class="tab-pane" id="login">
 				<h1>Create an Account</h1>
 				{{> register}}
+			</div>
+			<div class="tab-pane" id="new">
+				<h1>Create a new event</h1>
+				{{> event}}
+			</div>
+			<div class="tab-pane" id="existing">
+				<h1>My Events</h1>
 			</div>
 			<div class="tab-pane" id="about">
 				<h3>Send any comments and suggestions to <a href="mailto:mani.arathi@gmail.com">mani.arathi@gmail.com</a>.</h3>
@@ -43,4 +52,17 @@
 			</form>
 	</div>
    
+</template>
+
+<template name="event">
+	<form id="new-event" action="action">
+		<h2>Event details</h2>
+		<pre>Event name	<input type="text" id="event-name" required /></br>Location	<input type="text" id="event-location" /></pre>
+		<h2>Feedback Types</h2>
+		<pre>Option 1	<select name="option1">{{> options}}</select></br>Option 2	<select name="option2">{{> options}}</select></br>Option 3	<select name="option3">{{> options}}</select></pre>
+	</form>
+</template>
+
+<template name="options">
+<option value="opt1">Sound</option><option value="opt2">Content</option><option value="opt3">Visuals</option><option value="opt4">Delivery</option>
 </template>
