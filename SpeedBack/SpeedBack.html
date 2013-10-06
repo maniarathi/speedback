@@ -12,12 +12,13 @@
 			<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
 			
 			{{#if currentUser}}
-			<li><a href="#existing" data-toggle="tab">My Events</a></li>
-			<li><a href="#join" data-toggle="tab">Join</a></li>
-			<li><a href="#about" data-toggle="tab">About</a></li>
+			
 			{{else}}
 			<li><a href="#login" data-toggle="tab">Login</a></li>
+			<li><a href="#about" data-toggle="tab">About</a></li>
 			<li><a href="#new" data-toggle="tab">Create New</a></li>
+			<li><a href="#existing" data-toggle="tab">My Events</a></li>
+			<li><a href="#join" data-toggle="tab">Join</a></li>
 			{{/if}}
 			</ul>
 			<div id="my-tab-content" class="tab-content">
@@ -30,7 +31,6 @@
 					<div class="span6">
 						<h1>Login</h1>
 						{{> login}}
-						{{loggingIn}}
 					</div>
 					<div class="span6">
 						<h1>Create an Account</h1>
@@ -47,9 +47,7 @@
 			</div>
 			<div class="tab-pane" id="join">
 				<h1>Join an Event</h1>
-				<form id="join-form" action="action">
-					<pre>Event ID	<input type="text" id="join-id" required /></br><button name="join">Join!</button></pre>
-				</form>
+				{{> join}}
 			</div>
 			<div class="tab-pane" id="about">
 				<h3>Send any comments and suggestions to <a href="mailto:mani.arathi@gmail.com">mani.arathi@gmail.com</a>.</h3>
@@ -68,14 +66,14 @@
 
 <template name="register">
 	<form id="register-form" action="action">
-	<pre>Email		<input type="email" id="register-email" required/></br>Password	<input type="password" id="register-password" required/></br><button name="register">Create an account!</button/></pre>
+	<pre>Email		<input type="email" id="register-email" required/></br>Password	<input type="password" id="register-password" required/></br><input type="submit" id="register" value="Create an account!"\></pre>
 	</form>
    
 </template>
 
 <template name="login">
 	<form id="login-form" action="action">
-	<pre>Email		<input type="email" id="login-email" required/></br>Password	<input type="password" id="login-password" required/></br><button name="login">Login</button/></pre>
+	<pre>Email		<input type="email" id="login-email" required/></br>Password	<input type="password" id="login-password" required/></br><input type="submit" id="login" value="Login!"></input/></pre>
 	</form>
    
 </template>
@@ -92,4 +90,18 @@
 
 <template name="options">
 <option id="opt0">None</option><option id="opt1">Sound</option><option id="opt2">Content</option><option id="opt3">Visuals</option><option id="opt4">Delivery</option>
+</template>
+
+<template name="join">
+<form id="join-form" action="action">
+	<pre>Event ID	<input type="text" id="join-id" required /></br><button name="join">Join!</button></pre>
+</form>
+<table class="table">
+<tr><td><b>Event ID</b></td><td><b>Event Name</b></td><td><b>Event Location</b></td><td></td></tr>
+<tr><td>184</td><td>HackMIT Opener</td><td>mit</td><td><input type="submit" id="join" value="Join!"/></td></tr>
+<tr><td>102</td><td>CSE 3231 Lecture 5</td><td>osu</td><td><input type="submit" id="join" value="Join!"/></td></tr>
+<tr><td>172</td><td>Google Techtalk</td><td>cmu</td><td><input type="submit" id="join" value="Join!"/></td></tr>
+<tr><td>95</td><td>Venmo Techtalk</td><td>mit</td><td><input type="submit" id="join" value="Join!"/></td></tr>
+<tr><td>12</td><td>Lecture Series 2</td><td>osu</td><td><input type="submit" id="join" value="Join!"/></td></tr>
+</table>
 </template>

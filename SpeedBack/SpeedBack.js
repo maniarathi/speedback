@@ -1,6 +1,23 @@
 var Events = new Meteor.Collection("events");
+var People = new Meteor.Collection("people");
 
 if (Meteor.isClient) {
+	Meteor.subscribe("messages");
+	
+	Template.EventsTemplate.events = function () {  
+    return Events.find();  
+	};
+	
+	Template.PeopleTemplate.people = function () {  
+    return People.find();  
+	};
+	
+	Template.join.events({
+    'click join' : function () {
+	  window.location.href = 'Feedback.html';
+    }
+	});
+	
   Template.title.greeting = function () {
     $('#tabs').tab();
   };
@@ -18,27 +35,28 @@ if (Meteor.isClient) {
   };
 
   Template.register.events({
-	"click button[name='register']" : function (e,t) {
+	'click #register' : function (e,t) {
 		e.preventDefault();
-		var	email	= t.find('#login-email').value,
-			password= t.find('#login-password').value;
-			Meteor.call("createUser", getSessionToken(), user, email, password, function (error, result) {
-			if (!error) {
-				alert("User " + name + " added successfully.");
-			} else {
-				alert(error.reason);
-			}
-        });
-      return false;
+		var newUser = {  
+		email: t.find("#register-email").value,  
+		password: t.find("#register-password").value  
+        };
+		People.insert(newUser);
+		alert("Inserted new person!");
+		return false;
 	}
   });
   
   Template.login.events({
-	"click button[name='login']" : function (e,t) {
+	"click #login" : function (e,t) {
 		e.preventDefault();
 		var	email	= t.find('#login-email').value,
 			password= t.find('#login-password').value;
-		Meteor.loginWithPassword(email,password);
+		Meteor.loginWithPassword(email,password, function (error) {
+			if (error) {
+				console.log(error);
+			}
+		});
 		return false;
 	}
   });
@@ -46,6 +64,11 @@ if (Meteor.isClient) {
   Template.event.events({
 	"click button[name='create']" : function (e,t) {
 		e.preventDefault();
+		// dummy data
+	Events.insert({n:'test1'},{l:'mit'},{o1:'Sound'},{o2:'Visuals'},{o3:'Content'});
+	Events.insert({n:'test2'},{l:'mit'},{o1:'Sound'},{o2:'Visuals'},{o3:'Content'});
+	Events.insert({n:'test3'},{l:'mit'},{o1:'Sound'},{o2:'Visuals'},{o3:'Content'});
+	Events.insert({n:'test4'},{l:'mit'},{o1:'Sound'},{o2:'Visuals'},{o3:'Content'});
 		var name	= t.find('#event-name').value,
 			loc		= t.find('#event-location').value,
 			opt1	= t.find('#option1').value,
@@ -55,6 +78,10 @@ if (Meteor.isClient) {
 		return false;
 	}
   });
+  
+  Template.join.users = function () {
+	return Meteor.users.find();
+  };
 }
 
 if (Meteor.isServer) {
